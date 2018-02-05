@@ -1,6 +1,8 @@
+# -*- coding: utf-8 -*-
 import requests
 from bs4 import BeautifulSoup
 import time
+import string
 
 #查询是否注册
 def check(domain):
@@ -15,7 +17,8 @@ def check(domain):
         elif num == "213":
             print("查询超时，请重新查询")
         elif num == "211":
-            print("%s域名已注册"%domain)
+            pass
+            #print("%s域名已注册"%domain)
         else:
             print("出现未知问题")
         return num
@@ -23,7 +26,8 @@ def check(domain):
         print("让我哭一会，ip可能被封了")
         return None
 
-def domainlist(namepart):
+# 代表主题+单词  代表单词+主题
+def domainlist_from_dict(namepart):
     # 获取单词列表
     text = []
     with open('word.txt', 'r') as w:
@@ -38,6 +42,29 @@ def domainlist(namepart):
         names.append(name1)
         names.append(name2)
     return names
+
+def domainlist_all(namepart):
+    letters = list(string.ascii_lowercase)
+    # 生成域名列表
+    names = []
+    for a in letters:
+        name1 = namepart+a
+        name2 = a+namepart
+        names.append(name1)
+        names.append(name2)
+        
+    for a in letters:
+        for b in letters:
+            name1 = namepart+a+b
+            name2 = a+b+namepart
+            names.append(name1)
+            names.append(name2)
+    return names
+
+def domainlist(namepart):
+    #return domainlist_all(namepart)
+    return domainlist_from_dict(namepart)
+
 
 #保存可注册域名
 def domain(namepart,suffix):
@@ -59,6 +86,6 @@ def domain(namepart,suffix):
     return oklist
 
 if __name__ == '__main__':
-    namepart = input('输入要查询的主题：')
-    suffix = input('输入域名后缀: ')
+    namepart = "song" #input('输入要查询的主题：')
+    suffix = "com" #input('输入域名后缀: ')
     oklist = domain(namepart,suffix)

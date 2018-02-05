@@ -499,6 +499,7 @@ amount
 top
 outside
 piece
+sometime
 sometimes
 beauty
 trade
@@ -1997,3 +1998,27 @@ repetition
 soup
 whistle
 scenery
+
+# 码农词汇
+import
+bit
+byte
+char
+int
+short
+long
+double
+py
+ai
+cloud
+tensor
+
+
+# 两个词汇
+deeplearning
+findme
+
+
+
+
+# pinyin
