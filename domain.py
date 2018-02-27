@@ -43,7 +43,22 @@ def domainlist_from_dict(namepart):
         names.append(name2)
     return names
 
-def domainlist_all(namepart):
+
+def domainlist_1():
+    letters = list(string.ascii_lowercase)
+    names = []
+    for a in letters:
+        for b in letters:
+            for c in letters:
+                for d in letters:
+                    names.append(a+b+c+d)
+    return names
+
+# keyword + 
+def domainlist_all(namepart, step=2):
+    """
+    step
+    """
     letters = list(string.ascii_lowercase)
     # 生成域名列表
     names = []
@@ -62,8 +77,9 @@ def domainlist_all(namepart):
     return names
 
 def domainlist(namepart):
+    return domainlist_1()
     #return domainlist_all(namepart)
-    return domainlist_from_dict(namepart)
+    #return domainlist_from_dict(namepart)
 
 
 #保存可注册域名
@@ -72,7 +88,7 @@ def domain(namepart,suffix):
     names = domainlist(namepart)
     for name in names:
         domain = name+'.'+suffix
-        time.sleep(1)
+        time.sleep(2)
         num = check(domain)
         if num != None:
             if num == '210':
@@ -86,6 +102,6 @@ def domain(namepart,suffix):
     return oklist
 
 if __name__ == '__main__':
-    namepart = "song" #input('输入要查询的主题：')
+    namepart = "x" #input('输入要查询的主题：')
     suffix = "com" #input('输入域名后缀: ')
     oklist = domain(namepart,suffix)

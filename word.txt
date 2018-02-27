@@ -2014,7 +2014,7 @@ cloud
 tensor
 
 
-# 两个词汇
+# 两个词汇 双拼
 deeplearning
 findme
 
@@ -2022,3 +2022,6 @@ findme
 
 
 # pinyin
+bili
+pili
+
