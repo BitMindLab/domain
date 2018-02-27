@@ -17,8 +17,8 @@ def check(domain):
         elif num == "213":
             print("查询超时，请重新查询")
         elif num == "211":
-            pass
-            #print("%s域名已注册"%domain)
+            # pass
+            print("%s域名已注册"%domain)
         else:
             print("出现未知问题")
         return num
@@ -47,7 +47,7 @@ def domainlist_from_dict(namepart):
 def domainlist_1():
     letters = list(string.ascii_lowercase)
     names = []
-    for a in letters:
+    for a in ['e']:
         for b in letters:
             for c in letters:
                 for d in letters:
@@ -82,26 +82,43 @@ def domainlist(namepart):
     #return domainlist_from_dict(namepart)
 
 
+def print_status(num, domain):
+    if num == '210':
+        print("%s可以注册"%domain)
+    elif num == "213":
+        print("查询超时，请重新查询")
+    elif num == "211":
+        pass
+        #print("%s域名已注册"%domain)
+    else:
+        print("出现未知问题")
+
+
+
 #保存可注册域名
 def domain(namepart,suffix):
     oklist = []
     names = domainlist(namepart)
-    for name in names:
-        domain = name+'.'+suffix
-        time.sleep(2)
-        num = check(domain)
-        if num != None:
-            if num == '210':
-                oklist.append(domain)
-        else:
-            break
+
     with open('oklist.txt','w+') as ok:
-        for k in oklist:
-            s = k+'\n'
-            ok.write(s)
+        i = 0
+    	for name in names:
+            i = i +1
+            domain = name+'.'+suffix
+            time.sleep(3)
+            num = check(domain)
+	    if(i%1==0):
+                print_status(num, domain)
+            if num != None:
+                if num == '210':
+                    oklist.append(domain)
+		    ok.write(domain+'\n')
+                    ok.flush()
+	    else:
+                break
     return oklist
 
 if __name__ == '__main__':
     namepart = "x" #input('输入要查询的主题：')
-    suffix = "com" #input('输入域名后缀: ')
+    suffix = "org" #input('输入域名后缀: ')
     oklist = domain(namepart,suffix)
